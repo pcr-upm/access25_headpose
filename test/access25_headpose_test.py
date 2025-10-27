@@ -11,6 +11,7 @@ import json
 import copy
 import argparse
 import numpy as np
+import importlib.util
 from pathlib import Path
 from scipy.spatial.transform import Rotation
 from images_framework.src.constants import Modes
@@ -20,7 +21,7 @@ from images_framework.src.annotations import GenericGroup, GenericImage, PersonO
 from images_framework.src.viewer import Viewer
 from images_framework.src.utils import load_geoimage
 from images_framework.alignment.landmarks import lps
-from images_framework.alignment.access25_headpose.src.access25_headpose import Access25Headpose
+from src.access25_headpose import Access25Headpose
 
 image_extensions = ('bmp', 'jpg', 'jpeg', 'png', 'tif', 'tiff')
 video_extensions = ('mp4', 'avi', 'mkv')
@@ -132,12 +133,14 @@ def main():
 
     # Load vision components
     composite = Composite()
-    sa = Access25Headpose('images_framework/alignment/access25_headpose/')
+    sa = Access25Headpose('')
     composite.add(sa)
     composite.parse_options(unknown)
     composite.load(Modes.TEST)
+    spec = importlib.util.find_spec('images_framework')
+    output_path = os.path.join('images_framework' if spec is None else os.path.dirname(spec.origin), 'output')
     viewer = Viewer('access25_headpose_test')
-    dirname = 'images_framework/output/images/'
+    dirname = output_path+'images/'
     Path(dirname).mkdir(parents=True, exist_ok=True)
 
     # Process frame and show results
