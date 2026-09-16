@@ -8,14 +8,7 @@ https://doi.org/10.1109/ACCESS.2025.3561506
 ```
 
 #### Requisites
-- images-framework
-- torch
-- pytorch-lightning
-- torchvision
-- torch-summary
-- tensorboard
-- tqdm
-- scikit-learn
+The required dependencies are installed in the [`Dockerfile`](./Dockerfile#L33-L34).
 
 #### Usage
 ```
@@ -46,5 +39,5 @@ usage: Access25Headpose [--gpu GPU] --backbone {resnet,efficientnet} [--batch-si
 
 * Use the --patience option to set number of epochs with no improvement after which training will be stopped.
 ```
-> python test/access25_headpose_test.py --input-data test/example.tif --database aflw --gpu 0 --backbone resnet --save-image
+> python test/access25_headpose_test.py --input-data test/example.tif --database aflw --gpu 0 --backbone efficientnet --save-image
 ```

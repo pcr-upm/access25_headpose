@@ -30,5 +30,5 @@ ENV PATH /home/username/conda/envs/access25/bin:/home/username/conda/bin:$PATH
 # Make RUN commands use the new environment (source activate access25)
 SHELL ["conda", "run", "-n", "access25", "/bin/bash", "-c"]
 # Install dependencies
-RUN pip install images-framework tqdm scikit-learn
+RUN pip install pcr-framework tqdm scikit-learn
 RUN pip install torch pytorch-lightning torchvision torchinfo tensorboard
