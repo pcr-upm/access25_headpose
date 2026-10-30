@@ -8,7 +8,7 @@ https://doi.org/10.1109/ACCESS.2025.3561506
 ```
 
 #### Requisites
-The required dependencies are installed in the [`Dockerfile`](./Dockerfile#L33-L34).
+The required dependencies are installed in the [`Dockerfile`](./Dockerfile#L32-L33).
 
 #### Usage
 ```
