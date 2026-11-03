@@ -121,6 +121,7 @@ class Access25Headpose(Alignment):
 
     def process(self, ann, pred):
         from scipy.spatial.transform import Rotation
+        from pcr_framework.src.annotations import PersonObject
         # Prepare dataloader
         dataset_test = MyDataset([pred], self.order, self.width, self.height, Mode.TEST)
         dl_test = DataLoader(dataset_test, batch_size=self.batch_size, shuffle=False, num_workers=4, pin_memory=True, drop_last=False)
@@ -130,4 +131,6 @@ class Access25Headpose(Alignment):
                 euler = self.model(batch['img'].float().to(self.device)).squeeze().cpu().numpy()
                 # Save prediction
                 obj_pred = pred.images[batch['idx_img']].objects[batch['idx_obj']]
+                if not isinstance(obj_pred, PersonObject):
+                    continue
                 obj_pred.headpose = Rotation.from_euler(self.order, euler, degrees=True).as_matrix()
